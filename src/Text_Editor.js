@@ -4,13 +4,19 @@ import { QuillBinding } from "y-quill";
 import { Quill } from "react-quill";
 import ReactQuill from "react-quill";
 import QuillCursors from "quill-cursors";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { WebrtcProvider } from "y-webrtc";
+import { generateUsername } from "username-generator";
 import "react-quill/dist/quill.snow.css";
 
 const TextEditor = () => {
   let quill = null;
   let reactQuill = useRef(null);
+
+  let u = null;
+  let usersRef = useRef(null);
+
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     quill = reactQuill.current.getEditor();
@@ -21,10 +27,34 @@ const TextEditor = () => {
       signaling: ["wss://y-signaling-server.herokuapp.com/"],
       filterBcConns: false,
     });
+
     const ytext = ydoc.getText("text");
 
-    const binding = new QuillBinding(ytext, quill, provider.awareness);
+    const aware = provider.awareness;
+
+    const binding = new QuillBinding(ytext, quill, aware);
+
+    u = generateUsername("-");
+    usersRef.current.value = u;
+
+    aware.setLocalStateField("user", { name: usersRef.current.value });
+
+    aware.on("change", () => {
+      let users_arr = [];
+      aware.getStates().forEach((state) => {
+        if (state.user) {
+          users_arr.push(`<div> @ ${state.user.name}</div>`);
+        }
+        usersRef.current.innerHTML = users_arr.join("");
+      });
+    });
+
+    setUsers(usersRef.current.value);
   }, []);
+
+  const setUsers = (u) => {
+    setUser([...user, { name: u }]);
+  };
 
   const editorSetting = {
     toolbar: [
@@ -35,13 +65,20 @@ const TextEditor = () => {
   };
 
   return (
-    <ReactQuill
-      ref={reactQuill}
-      autoFocus="true"
-      modules={editorSetting}
-      placeholder="Start collab!"
-      theme="snow"
-    ></ReactQuill>
+    <div>
+      <ReactQuill
+        ref={reactQuill}
+        autoFocus="true"
+        modules={editorSetting}
+        placeholder="Start collab!"
+        theme="snow"
+      ></ReactQuill>
+      <div ref={usersRef}>
+        {user.map((u) => (
+          <pre key={u.name}>{u.name}</pre>
+        ))}
+      </div>
+    </div>
   );
 };
 
