@@ -39,7 +39,8 @@ const TextEditor = () => {
       ref={reactQuill}
       autoFocus="true"
       modules={editorSetting}
-      theme={"snow"}
+      placeholder="Start collab!"
+      theme="snow"
     ></ReactQuill>
   );
 };

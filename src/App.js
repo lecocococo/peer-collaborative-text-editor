@@ -2,7 +2,6 @@ import TextEditor from "./Text_Editor";
 import "./App.css";
 
 const App = () => {
-  // const classes = useStyles();
   return (
     <div className="head">
       <div className="first">
