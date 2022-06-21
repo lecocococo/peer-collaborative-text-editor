@@ -13,7 +13,7 @@ const TextEditor = () => {
   let reactQuill = useRef(null);
 
   useEffect(() => {
-    attachEditor();
+    quill = reactQuill.current.getEditor();
 
     const ydoc = new Y.Doc();
 
@@ -25,11 +25,6 @@ const TextEditor = () => {
 
     const binding = new QuillBinding(ytext, quill, provider.awareness);
   }, []);
-
-  const attachEditor = () => {
-    // if (typeof reactQuillRef.current.getEditor !== "function") return;
-    quill = reactQuill.current.getEditor();
-  };
 
   const editorSetting = {
     toolbar: [
