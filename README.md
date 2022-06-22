@@ -35,7 +35,7 @@ Third step,
 npm start
 ```
 
-**PlEASE OPEN IN CHROME or FIREFOX**
+**PLEASE OPEN IN CHROME or FIREFOX**
 Open two browsers or anther tab using URL
 
 It's done!!!
