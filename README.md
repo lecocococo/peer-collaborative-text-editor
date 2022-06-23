@@ -6,7 +6,6 @@ AND using peer to peer connection
 ## How to Start
 
 First step,
-
 ```
 npm install
 ```
@@ -14,6 +13,7 @@ npm install
 Second step
 Go to src/App.js
 
+change this part
 ```
 const provider = new WebrtcProvider("test-room", ydoc, {
       signaling: ["wss://y-signaling-server.herokuapp.com/"],
@@ -35,7 +35,7 @@ Third step,
 npm start
 ```
 
-**PLEASE OPEN IN CHROME or FIREFOX** <br>
+**PLEASE OPEN IN CHROME or FIREFOX!!!** <br>
 Open two browsers or anther tab using URL
 
 It's done!!!
