@@ -40,7 +40,7 @@ Open two browsers or anther tab using URL
 
 It's done!!!
 
-## Demo
+## Demo(NOT WORKING!! Because of heroku is not free anymore)
 !!!!! IMPORTANT: if you visit the demo sites please use another network to check its works(e.g. computer: wifi, mobile device: 3G, 4G, 5G and so on...) 
 Visit: https://y-main.herokuapp.com/
 Don't write Personal information because demo only have one room
